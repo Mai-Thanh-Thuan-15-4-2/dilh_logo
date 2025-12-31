@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DILH Consulting Logo Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        #logo-container {
+            margin: 30px 0;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+        }
+        svg {
+            max-width: 100%;
+            height: auto;
+        }
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .btn-download {
+            background: #6B8E23;
+            color: white;
+        }
+        .btn-download:hover {
+            background: #556B2F;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 142, 35, 0.3);
+        }
+        .btn-copy {
+            background: #4A90E2;
+            color: white;
+        }
+        .btn-copy:hover {
+            background: #357ABD;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+        }
+        .size-control {
+            margin-top: 20px;
+        }
+        .size-control label {
+            margin-right: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+        .size-control input {
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 100px;
+            font-size: 14px;
+        }
+        .size-control input[type="color"] {
+            width: 60px;
+            height: 40px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+        .message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .message.show {
+            opacity: 1;
+        }
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        h1 {
+            color: #6B8E23;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DILH Consulting Logo</h1>
+        <p>Create and export logo in multiple formats</p>
+        
+        <div id="logo-container">
+            <svg id="dilh-logo" width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background -->
+                <rect width="400" height="200" fill="white"/>
+                
+                <!-- Top line -->
+                <line x1="80" y1="110" x2="320" y2="110" stroke="#6B8E23" stroke-width="3"/>
+                
+                <!-- DILH text -->
+                <text id="dilh-text" x="200" y="95" font-family="Georgia, serif" font-size="98" font-weight="300" fill="#6B8E23" text-anchor="middle">DILH</text>
+
+                <!-- CONSULTING text -->
+                <text id="consulting-text" x="200" y="145" font-family="Georgia, serif" font-size="27" font-weight="normal" fill="#6B8E23" text-anchor="middle" letter-spacing="8">CONSULTING</text>
+            </svg>
+        </div>
+        
+        <div class="size-control">
+            <label for="dilh-font-size">"DILH" Font Size:</label>
+            <input type="number" id="dilh-font-size" value="98" min="30" max="150" oninput="updateFontSize()">
+            <label for="consulting-font-size" style="margin-left: 20px;">"CONSULTING" Font Size:</label>
+            <input type="number" id="consulting-font-size" value="27" min="10" max="60" oninput="updateFontSize()"        </div>
+        </div>
+
+        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+            <label for="dilh-font-weight">"DILH" Font Weight:</label>
+            <input type="number" id="dilh-font-weight" value="300" min="100" max="900" step="100" oninput="updateFontWeight()">
+            <label for="consulting-font-weight" style="margin-left: 20px;">"CONSULTING" Font Weight:</label>
+            <input type="number" id="consulting-font-weight" value="400" min="100" max="900" step="100" oninput="updateFontWeight()">
+        </div>
+
+        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+            <label for="logo-color">Logo Color:</label>
+            <input type="color" id="logo-color" value="#6B8E23" oninput="updateColor()">
+            <label for="bg-color" style="margin-left: 20px;">Background:</label>
+            <input type="color" id="bg-color" value="#ffffff" oninput="updateColor()">
+            <label style="margin-left: 10px;">
+                <input type="checkbox" id="bg-transparent" onchange="updateColor()"> Transparent
+            </label>
+        </div>
+
+        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+            <label for="line-color">Line Color:</label>
+            <input type="color" id="line-color" value="#6B8E23" oninput="updateLineColor()">
+            <label style="margin-left: 10px;">
+                <input type="checkbox" id="line-transparent" onchange="updateLineColor()"> Transparent
+            </label>
+        </div>
+
+        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+            <label for="export-width">Export Size - Width:</label>
+            <input type="number" id="export-width" value="800" min="400" max="4000" step="100">
+            <label for="export-height" style="margin-left: 20px;">Height:</label>
+            <input type="number" id="export-height" value="400" min="200" max="2000" step="50">
+        </div>
+        
+        <div class="controls">
+            <button class="btn-download" onclick="downloadSVG()">
+                📥 Download SVG
+            </button>
+            <button class="btn-download" onclick="downloadPNG()">
+                📥 Download PNG
+            </button>
+            <button class="btn-download" onclick="downloadJPG()">
+                📥 Download JPG
+            </button>
+        </div>
+        
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        function updateFontSize() {
+            const dilhFontSize = document.getElementById('dilh-font-size').value;
+            const consultingFontSize = document.getElementById('consulting-font-size').value;
+
+            const dilhText = document.getElementById('dilh-text');
+            const consultingText = document.getElementById('consulting-text');
+
+            dilhText.setAttribute('font-size', dilhFontSize);
+            consultingText.setAttribute('font-size', consultingFontSize);
+        }
+
+        function updateFontWeight() {
+            const dilhFontWeight = document.getElementById('dilh-font-weight').value;
+            const consultingFontWeight = document.getElementById('consulting-font-weight').value;
+
+            const dilhText = document.getElementById('dilh-text');
+            const consultingText = document.getElementById('consulting-text');
+
+            dilhText.setAttribute('font-weight', dilhFontWeight);
+            consultingText.setAttribute('font-weight', consultingFontWeight);
+        }
+
+        function updateColor() {
+            const logoColor = document.getElementById('logo-color').value;
+            const bgColor = document.getElementById('bg-color').value;
+            const bgTransparent = document.getElementById('bg-transparent').checked;
+
+            const dilhText = document.getElementById('dilh-text');
+            const consultingText = document.getElementById('consulting-text');
+            const bg = document.querySelector('rect');
+
+            dilhText.setAttribute('fill', logoColor);
+            consultingText.setAttribute('fill', logoColor);
+
+            if (bgTransparent) {
+                bg.setAttribute('fill', 'none');
+                bg.setAttribute('fill-opacity', '0');
+            } else {
+                bg.setAttribute('fill', bgColor);
+                bg.setAttribute('fill-opacity', '1');
+            }
+        }
+
+        function updateLineColor() {
+            const lineColor = document.getElementById('line-color').value;
+            const lineTransparent = document.getElementById('line-transparent').checked;
+            const line = document.querySelector('line');
+
+            if (lineTransparent) {
+                line.setAttribute('stroke', 'none');
+                line.setAttribute('stroke-opacity', '0');
+            } else {
+                line.setAttribute('stroke', lineColor);
+                line.setAttribute('stroke-opacity', '1');
+            }
+        }
+
+        function downloadSVG() {
+            const svg = document.getElementById('dilh-logo').cloneNode(true);
+
+            // Sử dụng kích thước xuất tùy chỉnh
+            const exportWidth = document.getElementById('export-width').value;
+            const exportHeight = document.getElementById('export-height').value;
+
+            svg.setAttribute('width', exportWidth);
+            svg.setAttribute('height', exportHeight);
+
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+            const svgUrl = URL.createObjectURL(svgBlob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = svgUrl;
+            downloadLink.download = 'dilh-consulting-logo.svg';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(svgUrl);
+            showMessage('Downloaded SVG file (' + exportWidth + 'x' + exportHeight + 'px)!', 'success');
+        }
+
+        function downloadPNG() {
+            exportImage('png');
+        }
+
+        function downloadJPG() {
+            exportImage('jpg');
+        }
+
+        function exportImage(format) {
+            const svg = document.getElementById('dilh-logo').cloneNode(true);
+            const exportWidth = document.getElementById('export-width').value;
+            const exportHeight = document.getElementById('export-height').value;
+
+            svg.setAttribute('width', exportWidth);
+            svg.setAttribute('height', exportHeight);
+
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const canvas = document.createElement('canvas');
+            canvas.width = exportWidth;
+            canvas.height = exportHeight;
+            const ctx = canvas.getContext('2d');
+
+            const img = new Image();
+            const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+            const url = URL.createObjectURL(svgBlob);
+
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0);
+                URL.revokeObjectURL(url);
+
+                canvas.toBlob(function(blob) {
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = downloadUrl;
+                    downloadLink.download = 'dilh-consulting-logo.' + format;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                    URL.revokeObjectURL(downloadUrl);
+                    showMessage('Downloaded ' + format.toUpperCase() + ' file (' + exportWidth + 'x' + exportHeight + 'px)!', 'success');
+                }, 'image/' + (format === 'jpg' ? 'jpeg' : 'png'));
+            };
+
+            img.src = url;
+        }
+
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = 'message show ' + type;
+            setTimeout(() => {
+                messageEl.className = 'message';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
