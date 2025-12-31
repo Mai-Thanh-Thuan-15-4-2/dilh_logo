@@ -25,7 +25,14 @@
         #logo-container {
             margin: 30px 0;
             padding: 40px;
-            background: white;
+            background:
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            background-color: white;
             border-radius: 10px;
         }
         svg {
@@ -106,6 +113,58 @@
             color: #6B8E23;
             margin-bottom: 10px;
         }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                width: 95%;
+                box-sizing: border-box;
+            }
+
+            #logo-container {
+                padding: 20px;
+                overflow-x: auto;
+            }
+
+            .size-control {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .size-control label {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .size-control input[type="number"],
+            .size-control input[type="color"],
+            .size-control select {
+                width: 100% !important;
+                max-width: none;
+                box-sizing: border-box;
+            }
+
+            .controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .controls button {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -116,7 +175,7 @@
         <div id="logo-container">
             <svg id="dilh-logo" width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
                 <!-- Background -->
-                <rect width="400" height="200" fill="white"/>
+                <rect width="400" height="200" fill="none" fill-opacity="0"/>
                 
                 <!-- Top line -->
                 <line x1="80" y1="110" x2="320" y2="110" stroke="#6B8E23" stroke-width="3"/>
@@ -149,7 +208,7 @@
             <label for="bg-color" style="margin-left: 20px;">Background:</label>
             <input type="color" id="bg-color" value="#ffffff" oninput="updateColor()">
             <label style="margin-left: 10px;">
-                <input type="checkbox" id="bg-transparent" onchange="updateColor()"> Transparent
+                <input type="checkbox" id="bg-transparent" onchange="updateColor()" checked> Transparent
             </label>
         </div>
 
@@ -195,6 +254,11 @@
     </div>
 
     <script>
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            updateColor(); // Apply transparent background by default
+        });
+
         function updateFontSize() {
             const dilhFontSize = document.getElementById('dilh-font-size').value;
             const consultingFontSize = document.getElementById('consulting-font-size').value;
