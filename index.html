@@ -321,7 +321,7 @@
 
         <div class="collapsible-section">
             <div class="collapsible-header" onclick="toggleCollapsible(this)">
-                <span><strong>⚙️ Advanced Line Settings</strong></span>
+                <span><strong>Advanced Line Settings</strong></span>
                 <span class="arrow">▼</span>
             </div>
             <div class="collapsible-content">
@@ -360,13 +360,16 @@
         
         <div class="controls">
             <button class="btn-download" onclick="downloadSVG()">
-                📥 Download SVG
+                Download SVG
             </button>
             <button class="btn-download" onclick="downloadPNG()">
-                📥 Download PNG
+                Download PNG
             </button>
             <button class="btn-download" onclick="downloadJPG()">
-                📥 Download JPG
+                Download JPG
+            </button>
+            <button class="btn-copy" onclick="resetToDefault()" style="background: #E74C3C;">
+                Reset to Default
             </button>
         </div>
 
@@ -536,6 +539,42 @@
             };
 
             img.src = url;
+        }
+
+        function resetToDefault() {
+            // Reset font sizes
+            document.getElementById('dilh-font-size').value = 98;
+            document.getElementById('consulting-font-size').value = 27;
+
+            // Reset font weights
+            document.getElementById('dilh-font-weight').value = 300;
+            document.getElementById('consulting-font-weight').value = 400;
+
+            // Reset colors
+            document.getElementById('logo-color').value = '#6B8E23';
+            document.getElementById('bg-color').value = '#ffffff';
+            document.getElementById('bg-transparent').checked = true;
+            document.getElementById('line-color').value = '#6B8E23';
+            document.getElementById('line-transparent').checked = false;
+
+            // Reset line settings
+            document.getElementById('line-width').value = 3;
+            document.getElementById('line-start').value = 80;
+            document.getElementById('line-end').value = 320;
+
+            // Reset export settings
+            document.getElementById('export-width').value = 800;
+            document.getElementById('export-height').value = 400;
+            document.getElementById('quality-scale').value = 4;
+
+            // Apply all updates
+            updateFontSize();
+            updateFontWeight();
+            updateColor();
+            updateLineColor();
+            updateLineSettings();
+
+            showMessage('Reset to default settings!', 'success');
         }
 
         function showMessage(text, type) {
