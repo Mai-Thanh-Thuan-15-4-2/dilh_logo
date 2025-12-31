@@ -107,6 +107,10 @@
         }
         .size-control {
             margin-top: 20px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .size-control label {
             margin-right: 10px;
@@ -120,12 +124,6 @@
             border-radius: 5px;
             width: 80px;
             font-size: 14px;
-        }
-        .size-control {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
         }
         .size-control input[type="color"] {
             width: 60px;
@@ -270,110 +268,144 @@
         <div class="main-content">
             <div class="logo-section">
                 <div id="logo-container">
-            <svg id="dilh-logo" width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+            <svg id="dilh-logo" width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
                 <!-- Background -->
-                <rect width="400" height="200" fill="none" fill-opacity="0"/>
-                
+                <rect id="logo-bg" width="600" height="300" fill="none" fill-opacity="0"/>
+
                 <!-- Top line -->
-                <line x1="80" y1="110" x2="320" y2="110" stroke="#6B8E23" stroke-width="3"/>
-                
+                <line id="logo-line" x1="180" y1="165" x2="419" y2="165" stroke="#6B8E23" stroke-width="3"/>
+
                 <!-- DILH text -->
-                <text id="dilh-text" x="200" y="95" font-family="Georgia, serif" font-size="98" font-weight="300" fill="#6B8E23" text-anchor="middle">DILH</text>
+                <text id="dilh-text" x="300" y="150" font-family="Georgia, serif" font-size="98" font-weight="300" fill="#6B8E23" text-anchor="middle">DILH</text>
 
                 <!-- CONSULTING text -->
-                <text id="consulting-text" x="200" y="145" font-family="Georgia, serif" font-size="27" font-weight="normal" fill="#6B8E23" text-anchor="middle" letter-spacing="8">CONSULTING</text>
+                <text id="consulting-text" x="300" y="200" font-family="Georgia, serif" font-size="26" font-weight="normal" fill="#6B8E23" text-anchor="middle" letter-spacing="8">CONSULTING</text>
             </svg>
                 </div>
             </div>
 
             <div class="controls-section">
                 <div class="size-control">
-            <label for="dilh-font-size">"DILH" Font Size:</label>
-            <input type="number" id="dilh-font-size" value="98" min="30" max="150" oninput="updateFontSize()">
-            <label for="consulting-font-size" style="margin-left: 20px;">"CONSULTING" Font Size:</label>
-            <input type="number" id="consulting-font-size" value="27" min="10" max="60" oninput="updateFontSize()"        </div>
-        </div>
-
-        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
-            <label for="dilh-font-weight">"DILH" Font Weight:</label>
-            <input type="number" id="dilh-font-weight" value="300" min="100" max="900" step="100" oninput="updateFontWeight()">
-            <label for="consulting-font-weight" style="margin-left: 20px;">"CONSULTING" Font Weight:</label>
-            <input type="number" id="consulting-font-weight" value="400" min="100" max="900" step="100" oninput="updateFontWeight()">
-        </div>
-
-        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
-            <label for="logo-color">Logo Color:</label>
-            <input type="color" id="logo-color" value="#6B8E23" oninput="updateColor()">
-            <label for="bg-color" style="margin-left: 20px;">Background:</label>
-            <input type="color" id="bg-color" value="#ffffff" oninput="updateColor()">
-            <label style="margin-left: 10px;">
-                <input type="checkbox" id="bg-transparent" onchange="updateColor()" checked> Transparent
-            </label>
-        </div>
-
-        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
-            <label for="line-color">Line Color:</label>
-            <input type="color" id="line-color" value="#6B8E23" oninput="updateLineColor()">
-            <label style="margin-left: 10px;">
-                <input type="checkbox" id="line-transparent" onchange="updateLineColor()"> Transparent
-            </label>
-        </div>
-
-        <div class="collapsible-section">
-            <div class="collapsible-header" onclick="toggleCollapsible(this)">
-                <span><strong>Advanced Line Settings</strong></span>
-                <span class="arrow">▼</span>
-            </div>
-            <div class="collapsible-content">
-                <div class="size-control" style="margin-top: 15px;">
-                    <label for="line-width">Line Thickness:</label>
-                    <input type="number" id="line-width" value="3" min="1" max="20" oninput="updateLineSettings()">
-                    <label for="line-start" style="margin-left: 20px;">Line Start (x1):</label>
-                    <input type="number" id="line-start" value="80" min="0" max="400" oninput="updateLineSettings()">
-                    <label for="line-end" style="margin-left: 20px;">Line End (x2):</label>
-                    <input type="number" id="line-end" value="320" min="0" max="400" oninput="updateLineSettings()">
+                    <label for="dilh-font-size">"DILH" Font Size:</label>
+                    <input type="number" id="dilh-font-size" value="98" min="30" max="150" oninput="updateFontSize()">
+                    <label for="consulting-font-size" style="margin-left: 20px;">"CONSULTING" Font Size:</label>
+                    <input type="number" id="consulting-font-size" value="26" min="10" max="60" oninput="updateFontSize()">
                 </div>
-            </div>
-        </div>
 
-        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
-            <label for="export-width">Export Size - Width:</label>
-            <input type="number" id="export-width" value="800" min="400" max="4000" step="100">
-            <label for="export-height" style="margin-left: 20px;">Height:</label>
-            <input type="number" id="export-height" value="400" min="200" max="2000" step="50">
-        </div>
+                <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+                    <label for="dilh-font-weight">"DILH" Font Weight:</label>
+                    <input type="number" id="dilh-font-weight" value="300" min="100" max="900" step="100" oninput="updateFontWeight()">
+                    <label for="consulting-font-weight" style="margin-left: 20px;">"CONSULTING" Font Weight:</label>
+                    <input type="number" id="consulting-font-weight" value="400" min="100" max="900" step="100" oninput="updateFontWeight()">
+                </div>
 
-        <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
-            <label for="quality-scale">Quality Scale (PNG/JPG):</label>
-            <select id="quality-scale" style="padding: 8px; border: 2px solid #ddd; border-radius: 5px; font-size: 14px;">
-                <option value="1">Standard (1x)</option>
-                <option value="2">High (2x)</option>
-                <option value="3">Very High (3x)</option>
-                <option value="4" selected>Ultra (4x)</option>
-                <option value="5">Super (5x)</option>
-                <option value="6">Extreme (6x)</option>
-                <option value="8">Maximum (8x)</option>
-                <option value="10">Print Quality (10x)</option>
-            </select>
-            <span style="margin-left: 10px; color: #666; font-size: 13px;">Higher quality = larger file size</span>
-        </div>
-        
-        <div class="controls">
-            <button class="btn-download" onclick="downloadSVG()">
-                Download SVG
-            </button>
-            <button class="btn-download" onclick="downloadPNG()">
-                Download PNG
-            </button>
-            <button class="btn-download" onclick="downloadJPG()">
-                Download JPG
-            </button>
-            <button class="btn-copy" onclick="resetToDefault()" style="background: #E74C3C;">
-                Reset to Default
-            </button>
-        </div>
+                <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+                    <label for="logo-color">Logo Color:</label>
+                    <input type="color" id="logo-color" value="#6B8E23" oninput="updateColor()">
+                    <label for="bg-color" style="margin-left: 20px;">Background:</label>
+                    <input type="color" id="bg-color" value="#ffffff" oninput="updateColor()">
+                    <label style="margin-left: 10px;">
+                        <input type="checkbox" id="bg-transparent" onchange="updateColor()" checked> Transparent
+                    </label>
+                </div>
 
-        <div id="message" class="message"></div>
+                <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+                    <label for="line-color">Line Color:</label>
+                    <input type="color" id="line-color" value="#6B8E23" oninput="updateLineColor()">
+                    <label style="margin-left: 10px;">
+                        <input type="checkbox" id="line-transparent" onchange="updateLineColor()"> Transparent
+                    </label>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span><strong>Canvas Size Settings</strong></span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="size-control" style="margin-top: 15px;">
+                            <label for="canvas-width">Canvas Width:</label>
+                            <input type="number" id="canvas-width" value="600" min="200" max="1200" oninput="updateCanvasSize()">
+                            <label for="canvas-height" style="margin-left: 20px;">Canvas Height:</label>
+                            <input type="number" id="canvas-height" value="300" min="100" max="600" oninput="updateCanvasSize()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span><strong>Position Settings</strong></span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="size-control" style="margin-top: 15px;">
+                            <label for="dilh-y">"DILH" Y Position:</label>
+                            <input type="number" id="dilh-y" value="150" min="0" max="300" oninput="updatePositions()">
+                            <label for="consulting-y" style="margin-left: 20px;">"CONSULTING" Y Position:</label>
+                            <input type="number" id="consulting-y" value="200" min="0" max="300" oninput="updatePositions()">
+                        </div>
+                        <div class="size-control" style="margin-top: 15px;">
+                            <label for="line-y">Line Y Position:</label>
+                            <input type="number" id="line-y" value="165" min="0" max="300" oninput="updatePositions()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span><strong>Advanced Line Settings</strong></span>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="size-control" style="margin-top: 15px;">
+                            <label for="line-width">Line Thickness:</label>
+                            <input type="number" id="line-width" value="3" min="1" max="20" oninput="updateLineSettings()">
+                            <label for="line-start" style="margin-left: 20px;">Line Start (x1):</label>
+                            <input type="number" id="line-start" value="180" min="0" max="600" oninput="updateLineSettings()">
+                            <label for="line-end" style="margin-left: 20px;">Line End (x2):</label>
+                            <input type="number" id="line-end" value="419" min="0" max="600" oninput="updateLineSettings()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+                    <label for="export-width">Export Size - Width:</label>
+                    <input type="number" id="export-width" value="800" min="400" max="4000" step="100">
+                    <label for="export-height" style="margin-left: 20px;">Height:</label>
+                    <input type="number" id="export-height" value="400" min="200" max="2000" step="50">
+                </div>
+
+                <div class="size-control" style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #eee;">
+                    <label for="quality-scale">Quality Scale (PNG/JPG):</label>
+                    <select id="quality-scale" style="padding: 8px; border: 2px solid #ddd; border-radius: 5px; font-size: 14px;">
+                        <option value="1">Standard (1x)</option>
+                        <option value="2">High (2x)</option>
+                        <option value="3">Very High (3x)</option>
+                        <option value="4" selected>Ultra (4x)</option>
+                        <option value="5">Super (5x)</option>
+                        <option value="6">Extreme (6x)</option>
+                        <option value="8">Maximum (8x)</option>
+                        <option value="10">Print Quality (10x)</option>
+                    </select>
+                    <span style="margin-left: 10px; color: #666; font-size: 13px;">Higher quality = larger file size</span>
+                </div>
+
+                <div class="controls">
+                    <button class="btn-download" onclick="downloadSVG()">
+                        Download SVG
+                    </button>
+                    <button class="btn-download" onclick="downloadPNG()">
+                        Download PNG
+                    </button>
+                    <button class="btn-download" onclick="downloadJPG()">
+                        Download JPG
+                    </button>
+                    <button class="btn-copy" onclick="resetToDefault()" style="background: #E74C3C;">
+                        Reset to Default
+                    </button>
+                </div>
+
+                <div id="message" class="message"></div>
             </div>
         </div>
     </div>
@@ -445,11 +477,46 @@
             const lineWidth = document.getElementById('line-width').value;
             const lineStart = document.getElementById('line-start').value;
             const lineEnd = document.getElementById('line-end').value;
-            const line = document.querySelector('line');
+            const line = document.getElementById('logo-line');
 
             line.setAttribute('stroke-width', lineWidth);
             line.setAttribute('x1', lineStart);
             line.setAttribute('x2', lineEnd);
+        }
+
+        function updateCanvasSize() {
+            const canvasWidth = document.getElementById('canvas-width').value;
+            const canvasHeight = document.getElementById('canvas-height').value;
+            const svg = document.getElementById('dilh-logo');
+            const bg = document.getElementById('logo-bg');
+
+            svg.setAttribute('width', canvasWidth);
+            svg.setAttribute('height', canvasHeight);
+            svg.setAttribute('viewBox', '0 0 ' + canvasWidth + ' ' + canvasHeight);
+            bg.setAttribute('width', canvasWidth);
+            bg.setAttribute('height', canvasHeight);
+
+            // Update max values for position inputs
+            document.getElementById('dilh-y').max = canvasHeight;
+            document.getElementById('consulting-y').max = canvasHeight;
+            document.getElementById('line-y').max = canvasHeight;
+            document.getElementById('line-start').max = canvasWidth;
+            document.getElementById('line-end').max = canvasWidth;
+        }
+
+        function updatePositions() {
+            const dilhY = document.getElementById('dilh-y').value;
+            const consultingY = document.getElementById('consulting-y').value;
+            const lineY = document.getElementById('line-y').value;
+
+            const dilhText = document.getElementById('dilh-text');
+            const consultingText = document.getElementById('consulting-text');
+            const line = document.getElementById('logo-line');
+
+            dilhText.setAttribute('y', dilhY);
+            consultingText.setAttribute('y', consultingY);
+            line.setAttribute('y1', lineY);
+            line.setAttribute('y2', lineY);
         }
 
         function toggleCollapsible(header) {
@@ -544,7 +611,7 @@
         function resetToDefault() {
             // Reset font sizes
             document.getElementById('dilh-font-size').value = 98;
-            document.getElementById('consulting-font-size').value = 27;
+            document.getElementById('consulting-font-size').value = 26;
 
             // Reset font weights
             document.getElementById('dilh-font-weight').value = 300;
@@ -557,10 +624,19 @@
             document.getElementById('line-color').value = '#6B8E23';
             document.getElementById('line-transparent').checked = false;
 
+            // Reset canvas size
+            document.getElementById('canvas-width').value = 600;
+            document.getElementById('canvas-height').value = 300;
+
+            // Reset positions
+            document.getElementById('dilh-y').value = 150;
+            document.getElementById('consulting-y').value = 200;
+            document.getElementById('line-y').value = 165;
+
             // Reset line settings
             document.getElementById('line-width').value = 3;
-            document.getElementById('line-start').value = 80;
-            document.getElementById('line-end').value = 320;
+            document.getElementById('line-start').value = 180;
+            document.getElementById('line-end').value = 419;
 
             // Reset export settings
             document.getElementById('export-width').value = 800;
@@ -572,6 +648,8 @@
             updateFontWeight();
             updateColor();
             updateLineColor();
+            updateCanvasSize();
+            updatePositions();
             updateLineSettings();
 
             showMessage('Reset to default settings!', 'success');
